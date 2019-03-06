@@ -6,7 +6,7 @@ class Chart extends Component {
   render() {
     const options = {
       title: {
-        text: 'Events',
+        text: 'Data Points',
         align: 'center',
         margin: 20,
         style: {
@@ -14,7 +14,7 @@ class Chart extends Component {
         }
       },
       yaxis: {
-        seriesName: 'events',
+        seriesName: 'dataPoints',
         axisTicks: {
           show: true,
         },
@@ -27,15 +27,16 @@ class Chart extends Component {
             color: '#662E9B',
           }
         },
-        title: {
-          // text: 'events',
-          style: {
-            color: '#662E9B',
-          }
-        },
         tooltip: {
           enabled: true
-        } },
+        }
+      },
+      // xaxis: {
+      //   axisTicks: {
+      //     show: true
+      //   },
+      //   tickPlacement: 'on'
+      // },
       tooltip: {
         fixed: {
           enabled: true,
@@ -105,25 +106,25 @@ class Chart extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    sensor1: state.data.events.map(e => {
+    sensor1: state.data.dataPoints.map(e => {
       return {
         date: e.data.date,
         data: e.data.sensor1
       };
     }),
-    sensor2: state.data.events.map(e => {
+    sensor2: state.data.dataPoints.map(e => {
       return {
         date: e.data.date,
         data: e.data.sensor2
       };
     }),
-    sensor3: state.data.events.map(e => {
+    sensor3: state.data.dataPoints.map(e => {
       return {
         date: e.data.date,
         data: e.data.sensor3
       };
     }),
-    sensor4: state.data.events.map(e => {
+    sensor4: state.data.dataPoints.map(e => {
       return {
         date: e.data.date,
         data: e.data.sensor4

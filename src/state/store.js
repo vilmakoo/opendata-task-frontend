@@ -4,12 +4,12 @@ import dataReducer from './dataReducer';
 
 const reducer = combineReducers({
   data: dataReducer
-})
+});
 
 
 const store = createStore(
   reducer,
   applyMiddleware(thunk)
-)
+);
 
-export default store
+export default store;

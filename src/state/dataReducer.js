@@ -1,19 +1,19 @@
 import axios from 'axios';
 
-const initialState = { events: [], error: null };
+const initialState = { dataPoints: [], error: null };
 
 const dataReducer = (state = initialState, action) => {
   switch (action.type) {
-  case 'SET_ALL_EVENTS':
+  case 'SET_ALL_DATA_POINTS':
     return {
       ...state,
-      events: action.events
+      dataPoints: action.dataPoints
     };
 
-  case 'SET_NEW_EVENT':
+  case 'SET_NEW_DATA_POINT':
     return {
       ...state,
-      events: [...state.events, action.events]
+      dataPoints: [...state.dataPoints, action.dataPoints]
     };
 
   case 'SET_ERROR':
@@ -44,21 +44,20 @@ export const setError = (error) => {
   };
 };
 
-// const baseUrl = process.env.API_URL || 'http://localhost:3000';
 
 export const fetchNewData = () => {
   return async (dispatch) => {
     try {
       const data = await axios.get('/api/fetch_new_data');
 
-      if (data.data === 'event already saved') {
-        setError('event already saved');
+      if (data.data === 'data point already saved') {
+        setError('data point already saved');
         return;
       }
 
       dispatch({
-        type: 'SET_NEW_EVENT',
-        events: data.data
+        type: 'SET_NEW_DATA_POINT',
+        dataPoints: data.data
       });
     } catch (err) {
       setError(err);
@@ -66,14 +65,14 @@ export const fetchNewData = () => {
   };
 };
 
-export const getAllEvents = () => {
+export const getAllDataPoints = () => {
   return async (dispatch) => {
     try {
-      const data = await axios.get('/api/get_events');
+      const data = await axios.get('/api/get_data_points');
 
       dispatch({
-        type: 'SET_ALL_EVENTS',
-        events: data.data
+        type: 'SET_ALL_DATA_POINTS',
+        dataPoints: data.data
       });
     } catch (err) {
       setError(err);
