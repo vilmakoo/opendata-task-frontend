@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const initialState = { dataPoints: [], error: null };
+const initialState = { dataPoints: [], fetchTime: null, error: null };
 
 const dataReducer = (state = initialState, action) => {
   switch (action.type) {
@@ -20,6 +20,12 @@ const dataReducer = (state = initialState, action) => {
     return {
       ...state,
       error: action.error
+    };
+
+  case 'SET_FETCH_TIME':
+    return {
+      ...state,
+      fetchTime: new Date()
     };
 
   default:
@@ -48,16 +54,20 @@ export const setError = (error) => {
 export const fetchNewData = () => {
   return async (dispatch) => {
     try {
-      const data = await axios.get('/api/fetch_new_data');
+      const resp = await axios.get('/api/fetch_new_data');
 
-      if (data.data === 'data point already saved') {
+      dispatch({
+        type: 'SET_FETCH_TIME'
+      });
+
+      if (resp.data === 'data point already saved') {
         setError('data point already saved');
         return;
       }
 
       dispatch({
         type: 'SET_NEW_DATA_POINT',
-        dataPoints: data.data
+        dataPoints: resp.data.data // TODO: parsi date kivaan muotoon
       });
     } catch (err) {
       setError(err);
@@ -68,11 +78,11 @@ export const fetchNewData = () => {
 export const getAllDataPoints = () => {
   return async (dispatch) => {
     try {
-      const data = await axios.get('/api/get_data_points');
+      const resp = await axios.get('/api/get_data_points');
 
       dispatch({
         type: 'SET_ALL_DATA_POINTS',
-        dataPoints: data.data
+        dataPoints: resp.data.map(d => d.data)
       });
     } catch (err) {
       setError(err);

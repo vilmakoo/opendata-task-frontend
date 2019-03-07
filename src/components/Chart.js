@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ApexChart from 'react-apexcharts';
 import { connect } from 'react-redux';
+import { parseTime } from '../utils/parser';
 
 class Chart extends Component {
   render() {
@@ -31,12 +32,20 @@ class Chart extends Component {
           enabled: true
         }
       },
-      // xaxis: {
-      //   axisTicks: {
-      //     show: true
-      //   },
-      //   tickPlacement: 'on'
-      // },
+      xaxis: {
+        axisTicks: {
+          show: false
+        },
+        tickPlacement: 'on',
+        labels: {
+          formatter: (value) => {
+            if (typeof(value) === 'number') {
+              return value;
+            }
+            return parseTime(new Date(value));
+          }
+        }
+      },
       tooltip: {
         fixed: {
           enabled: true,
@@ -108,26 +117,26 @@ const mapStateToProps = (state) => {
   return {
     sensor1: state.data.dataPoints.map(e => {
       return {
-        date: e.data.date,
-        data: e.data.sensor1
+        date: e.date,
+        data: e.sensor1
       };
     }),
     sensor2: state.data.dataPoints.map(e => {
       return {
-        date: e.data.date,
-        data: e.data.sensor2
+        date: e.date,
+        data: e.sensor2
       };
     }),
     sensor3: state.data.dataPoints.map(e => {
       return {
-        date: e.data.date,
-        data: e.data.sensor3
+        date: e.date,
+        data: e.sensor3
       };
     }),
     sensor4: state.data.dataPoints.map(e => {
       return {
-        date: e.data.date,
-        data: e.data.sensor4
+        date: e.date,
+        data: e.sensor4
       };
     })
   };
