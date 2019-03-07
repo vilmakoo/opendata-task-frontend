@@ -81,9 +81,12 @@ export const getAllDataPoints = () => {
       const resp = await axios.get('/api/get_data_points');
 
       dispatch({
+        type: 'SET_FETCH_TIME'
+      });
+      dispatch({
         type: 'SET_ALL_DATA_POINTS',
         dataPoints: resp.data.map(d => d.data)
-      });
+      },);
     } catch (err) {
       setError(err);
     }

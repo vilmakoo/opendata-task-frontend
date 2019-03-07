@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Button from '@material-ui/core/Button';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import { fetchNewData, getAllDataPoints } from '../state/dataReducer';
 import Chart from './Chart';
 import { parseTime } from '../utils/parser';
@@ -17,31 +20,53 @@ class App extends Component {
   }
 
   render() {
-    const handleFetchNewDataButtonClick = async () => {
-      this.props.fetchNewData();
-    };
+    // used for developing:
+    // const handleFetchNewDataButtonClick = async () => {
+    //   this.props.fetchNewData();
+    // };
 
-    const handleGetDataPointsButtonClick = async () => {
-      this.props.getAllDataPoints();
-    };
+    // const handleGetDataPointsButtonClick = async () => {
+    //   this.props.getAllDataPoints();
+    // };
 
     return (
-      <div className='App'>
-        <h1>Data visualization</h1>
+      <React.Fragment>
+        <CssBaseline>
+          <div className='app'>
+            <Typography variant='h1' color='primary' gutterBottom={true}>
+            Data visualization
+            </Typography>
 
-        <p>This app fetches a new data point from a given api every hour and adds it to the chart.</p>
+            <Typography variant='h4' paragraph color='textPrimary'>
+            This is an app that fetches a new data point<br />
+            from a given API every hour<br />
+            and visualizes the data in a chart.
+            </Typography>
 
-        <p>Last data point was fetched at {parseTime(this.props.fetchTime)}.</p>
+            {/* <p>These buttons are meant for developing:</p>
+            <Button variant='outlined' size='large' onClick={ handleFetchNewDataButtonClick }>Fetch a new data point</Button>
+            <Button variant='outlined' size='large' onClick={ handleGetDataPointsButtonClick }>Get all data points</Button> */}
 
-        <p>These buttons are meant for developing:</p>
-        <Button variant='outlined' size='large' onClick={handleFetchNewDataButtonClick}>Fetch a new data point</Button>
-        <Button variant='outlined' size='large' onClick={handleGetDataPointsButtonClick}>Get all data points</Button>
+            <div className='chart-container'>
+              <Typography variant='h2' color='primary' gutterBottom={true}>
+            The Chart
+              </Typography>
+              <div className='fetch-time'>
+                <Typography paragraph className='fetch-time-p' color='textPrimary'>Last data point was fetched at:</Typography>
+                <Card className='fetch-time-card'>
+                  <CardContent className='fetch-time-content'>
+                    <Typography variant='subtitle2' color='textPrimary'>
+                      { parseTime(this.props.fetchTime) }
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
 
-        <h1>Charts</h1>
-
-        <Chart />
-
-      </div>
+            <Chart />
+          </div>
+        </CssBaseline>
+      </React.Fragment>
     );
   }
 }

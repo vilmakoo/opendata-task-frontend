@@ -6,14 +6,6 @@ import { parseTime } from '../utils/parser';
 class Chart extends Component {
   render() {
     const options = {
-      title: {
-        text: 'Data Points',
-        align: 'center',
-        margin: 20,
-        style: {
-          fontSize:  '20px'
-        }
-      },
       yaxis: {
         seriesName: 'dataPoints',
         axisTicks: {
@@ -49,15 +41,14 @@ class Chart extends Component {
       tooltip: {
         fixed: {
           enabled: true,
-          position: 'topLeft', // topRight, topLeft, bottomRight, bottomLeft
+          position: 'topLeft',
           offsetY: 30,
           offsetX: 60
         },
-        // x: { formatter: (seriesName) => 'Year: ' + seriesName }
       },
       legend: {
         position: 'top',
-        horizontalAlign: 'right',
+        horizontalAlign: 'left',
         offsetX: 40,
         showForNullSeries: false,
       }
@@ -107,7 +98,7 @@ class Chart extends Component {
 
     return (
       <div>
-        <ApexChart options={options} series={series} type='line' width='700px' />
+        <ApexChart className='chart' options={options} series={series} type='line' width='700px' />
       </div>
     );
   }
