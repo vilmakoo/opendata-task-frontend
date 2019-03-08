@@ -26,24 +26,24 @@ class App extends Component {
         <CssBaseline>
           <div className='app'>
             <Typography variant='h1' color='primary' gutterBottom={true}>
-            Data visualization
+              Data visualization
             </Typography>
 
             <Typography variant='h4' paragraph color='textPrimary'>
-            App for visualizing data.
+              App for visualizing data.
             </Typography>
             <Typography variant='h5' paragraph color='textPrimary'>
-            The server will fetch a new data point hourly<br />
-            from a given API and save it to the database.<br />
-            The data points are visualized on the chart below.
+              The server will fetch a new data point hourly<br />
+              from a given API and save it to the database.<br />
+              The data points are visualized on the chart below.
             </Typography>
 
-            <Button variant='outlined' color='primary' size='large' onClick={ handleFetchNewDataButtonClick }>Fetch a new data point manually</Button>
-            <Button variant='outlined' color='primary' size='large' onClick={ handleGetDataPointsButtonClick }>Update the chart</Button>
+            <Button className='button' variant='outlined' color='primary' size='large' onClick={ handleGetDataPointsButtonClick }>Update the chart</Button>
+            <Button className='button' variant='outlined' color='primary' size='large' onClick={ handleFetchNewDataButtonClick }>Fetch a new data point manually</Button>
 
             <div className='chart-container'>
               <Typography variant='h2' color='primary' gutterBottom={true}>
-            The Chart
+                The Chart
               </Typography>
             </div>
 

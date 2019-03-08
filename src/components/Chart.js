@@ -109,7 +109,7 @@ class Chart extends Component {
 
     return (
       <div>
-        <ApexChart className='chart' options={options} series={series} type='line' width='700px' />
+        <ApexChart className='chart' options={options} series={series} type='line' width='90%' height='600px' />
       </div>
     );
   }
