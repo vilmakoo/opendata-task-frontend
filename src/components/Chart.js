@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import ApexChart from 'react-apexcharts';
 import { connect } from 'react-redux';
-import { parseTime } from '../utils/parser';
 
 class Chart extends Component {
   render() {
+    const parseTime = (date) => {
+      if (!date) {
+        return '';
+      }
+      const day = date.getUTCDate();
+      const month = date.getMonth() + 1;
+      const hours = ('0' + date.getHours()).slice(-2);
+      const minutes = ('0' + date.getMinutes()).slice(-2);
+
+      return `${day}.${month}. ${hours}:${minutes}`;
+    };
+
     const options = {
       yaxis: {
         seriesName: 'dataPoints',
