@@ -1,3 +1,3 @@
-The backend is [here](http://github.com/vilmakoo/opendata-task-backend).
+This is an app that, when running, fetched a new data point from an API provided by Eficode, saves it to a database and visualizes the data on a chart. The [backend](http://github.com/vilmakoo/opendata-task-backend) is built with Node.js + Express and it uses a MongoDB database. The frontend is a React app.
 
 The app can be tried out [here](https://eficode-opendata-task.herokuapp.com/). Note that the heroku app goes idle after 30 minutes of inactivity.
